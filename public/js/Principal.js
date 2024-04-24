@@ -123,6 +123,30 @@ var Principal = (function () {
         }
 
 
+        //activar menu de CUSTODIOS
+        function activeMenuProgramacion() {
+            $("#menuProgramacion").addClass("menu-item-active");
+            $("#menuProgramacion").addClass("menu-item-open");
+        }
+
+        //rutas para el menu de clientes
+        if (routeName.includes("programacion")) {
+            activeMenuCustodios();
+            //we addd the active class to the menuUsuarios parent item
+            $("#menuRegistroProgramacion").addClass("menu-item-active");
+            $("#menuRegistroProgramacion").addClass("menu-item-open");
+
+            switch (routeName) {
+                case "programacion.listadoprogramacion":
+                    //we add the class 'menu-item-open' to id menuListadoUsuarios
+                    $("#menuListadoProgramacion").addClass("menu-item-open");
+                    break;
+
+            }
+        }
+
+
+
         //activar menu de CATALOGOS
         function activeMenuCatalogos() {
             $("#menuCatalogos").addClass("menu-item-active");

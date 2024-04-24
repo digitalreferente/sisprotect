@@ -124,14 +124,14 @@
                         <li id="menuHome" class="menu-item menu-item-active" aria-haspopup="true">
                             <a href="{{ route('tablero.show') }}" class="menu-link">
                                 <i class="flaticon-pie-chart-1 menu-icon"></i>
-                                <span class="menu-text">TABLERO</span>
+                                <span class="menu-text">Tablero</span>
                             </a>
                         </li>
                         @if (in_array("1", Session::get('permisos')) || in_array("2", Session::get('permisos')) || in_array("5", Session::get('permisos')) || in_array("6", Session::get('permisos')) )
                             <li id="menuAdministracion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="javascript:;" class="menu-link menu-toggle">
                                     <i class="flaticon2-user-1 menu-icon"></i>
-                                    <span class="menu-text">ADMINISTRACIÓN DEL SISTEMA</span>
+                                    <span class="menu-text">Administración del sistema</span>
                                     <i class="menu-arrow"></i>
                                 </a>
                                 <div class="menu-submenu">
@@ -293,12 +293,89 @@
                             </li>
          {{-- END c u s t o d i o s --}}
 
+        {{-- P R O G R A M A C I O N --}}
+                            <li id="menuProgramacion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="javascript:;" class="menu-link menu-toggle">
+                                    <i class="flaticon-notepad menu-icon"></i>
+                                    <span class="menu-text">Programación</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="menu-submenu">
+                                    <i class="menu-arrow"></i>
+                                    <ul class="menu-subnav">
+
+                                        <li id="menuRegistroProgramacion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                                <i class="flaticon-notepad menu-icon"></i>
+                                                <span class="menu-text">Programación</span>
+                                                <i class="menu-arrow"></i>
+                                            </a>
+                                            <div class="menu-submenu">
+                                                <i class="menu-arrow"></i>
+                                                <ul class="menu-subnav">
+                                                    <li id="menuListadoProgramacion" class="menu-item" aria-haspopup="true">
+                                                        <a href="{{ route('programacion.listadoprogramacion') }}" class="menu-link">
+                                                        <i class="menu-bullet menu-bullet-dot">
+                                                            <span></span>
+                                                        </i>
+                                                        <span class="menu-text">Listado de programación</span>
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+         {{-- END P R O G R A M A C I O N --}}
+
+
+
+        {{-- M O N I T O R E O --}}
+                            <li id="menuProgramacion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="javascript:;" class="menu-link menu-toggle">
+                                    <i class="flaticon2-console menu-icon"></i>
+                                    <span class="menu-text">Monitoreo</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="menu-submenu">
+                                    <i class="menu-arrow"></i>
+                                    <ul class="menu-subnav">
+
+                                        <li id="menuRegistroProgramacion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                                <i class="flaticon2-console menu-icon"></i>
+                                                <span class="menu-text">Monitoreo</span>
+                                                <i class="menu-arrow"></i>
+                                            </a>
+                                            <div class="menu-submenu">
+                                                <i class="menu-arrow"></i>
+                                                <ul class="menu-subnav">
+                                                    <li id="menuListadoProgramacion" class="menu-item" aria-haspopup="true">
+                                                        <a href="{{ route('custodio.listadocustodio') }}" class="menu-link">
+                                                        <i class="menu-bullet menu-bullet-dot">
+                                                            <span></span>
+                                                        </i>
+                                                        <span class="menu-text">Listado de monitoreo</span>
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+         {{-- END M O N I T O R E O --}}
+
+
                         
         {{-- CATÁLOGOS --}}
                         <li id="menuCatalogos" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                             <a href="javascript:;" class="menu-link menu-toggle">
                                 <i class="flaticon2-folder menu-icon"></i>
-                                <span class="menu-text">CATÁLOGOS</span>
+                                <span class="menu-text">Catálogos</span>
                                 <i class="menu-arrow"></i>
                             </a>
                             <div class="menu-submenu">

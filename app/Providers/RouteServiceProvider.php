@@ -29,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapClienteRoutes();
         $this->mapCustodioRoutes();
         $this->mapTarifarioRoutes();
+        $this->mapProgramacionRoutes();
 
     }
 
@@ -105,5 +106,14 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace . '\Tarifario')
             ->group(base_path('routes/tarifario.php'));
     }
+
+    protected function mapProgramacionRoutes()
+    {
+        Route::middleware('web')
+            ->prefix('programacion')
+            ->namespace($this->namespace . '\Programacion')
+            ->group(base_path('routes/programacion.php'));
+    }
+    
 
 }
