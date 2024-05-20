@@ -123,7 +123,7 @@ var Principal = (function () {
         }
 
 
-        //activar menu de CUSTODIOS
+        //activar menu de Programacion
         function activeMenuProgramacion() {
             $("#menuProgramacion").addClass("menu-item-active");
             $("#menuProgramacion").addClass("menu-item-open");
@@ -131,7 +131,7 @@ var Principal = (function () {
 
         //rutas para el menu de clientes
         if (routeName.includes("programacion")) {
-            activeMenuCustodios();
+            activeMenuProgramacion();
             //we addd the active class to the menuUsuarios parent item
             $("#menuRegistroProgramacion").addClass("menu-item-active");
             $("#menuRegistroProgramacion").addClass("menu-item-open");
@@ -140,6 +140,29 @@ var Principal = (function () {
                 case "programacion.listadoprogramacion":
                     //we add the class 'menu-item-open' to id menuListadoUsuarios
                     $("#menuListadoProgramacion").addClass("menu-item-open");
+                    break;
+
+            }
+        }
+
+
+        //activar menu de Monitoreo
+        function activeMenuMonitoreo() {
+            $("#menuMonitoreo").addClass("menu-item-active");
+            $("#menuMonitoreo").addClass("menu-item-open");
+        }
+
+        //rutas para el menu de clientes
+        if (routeName.includes("monitoreo")) {
+            activeMenuMonitoreo();
+            //we addd the active class to the menuUsuarios parent item
+            $("#menuRegistroMonitoreo").addClass("menu-item-active");
+            $("#menuRegistroMonitoreo").addClass("menu-item-open");
+
+            switch (routeName) {
+                case "monitoreo.listamonitoreo":
+                    //we add the class 'menu-item-open' to id menuListadoUsuarios
+                    $("#menuListadoMonitoreo").addClass("menu-item-open");
                     break;
 
             }

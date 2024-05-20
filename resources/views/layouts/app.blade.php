@@ -333,7 +333,7 @@
 
 
         {{-- M O N I T O R E O --}}
-                            <li id="menuProgramacion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <li id="menuMonitoreo" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="javascript:;" class="menu-link menu-toggle">
                                     <i class="flaticon2-console menu-icon"></i>
                                     <span class="menu-text">Monitoreo</span>
@@ -343,7 +343,7 @@
                                     <i class="menu-arrow"></i>
                                     <ul class="menu-subnav">
 
-                                        <li id="menuRegistroProgramacion" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                        <li id="menuRegistroMonitoreo" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                             <a href="javascript:;" class="menu-link menu-toggle">
                                                 <i class="flaticon2-console menu-icon"></i>
                                                 <span class="menu-text">Monitoreo</span>
@@ -352,8 +352,8 @@
                                             <div class="menu-submenu">
                                                 <i class="menu-arrow"></i>
                                                 <ul class="menu-subnav">
-                                                    <li id="menuListadoProgramacion" class="menu-item" aria-haspopup="true">
-                                                        <a href="{{ route('custodio.listadocustodio') }}" class="menu-link">
+                                                    <li id="menuListadoMonitoreo" class="menu-item" aria-haspopup="true">
+                                                        <a href="{{ route('monitoreo.listamonitoreo') }}" class="menu-link">
                                                         <i class="menu-bullet menu-bullet-dot">
                                                             <span></span>
                                                         </i>

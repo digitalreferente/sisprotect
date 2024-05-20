@@ -16,7 +16,7 @@
                     <h3 class="card-title">Agregar Programación</h3>
                 </div>
                 <!--begin::Form-->
-                <form action="" method="post" id="submit_programacion">
+                <form action="{{ route('programacion.guardarprogramacion') }}" method="post" id="submit_programacion" enctype="multipart/form-data">
                     @csrf
 
                     <input type='hidden' id='url_tarifario' value='{{ route('programacion.obtenertarifas') }}'>
@@ -95,7 +95,7 @@
                                     <div class="col-lg-6">
                                         <label>Custodio</label>
                                         <select class="form-control" id="custodio_id" name="custodio_id" required >
-                                            <option value="">Selecciona una cliente</option>
+                                            <option value="">Selecciona una custodio</option>
                                             @foreach($custodio as $cli)
                                                 <option value="{{ $cli->id }}" >{{ $cli->nombre_custodio }} {{ $cli->ap_paterno }} {{ $cli->ap_materno }}</option>
                                             @endforeach
@@ -123,7 +123,7 @@
                                     <div class="card-header">
                                         <div class="card-title">
                                             <h3 class="card-label">
-                                                Custodios
+                                                Acompañantes
                                             </h3>
                                         </div>
                                     </div>
@@ -170,7 +170,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-lg-6">
-                                {{-- <button type="button"  id="btnGuardar" class="btn btn-primary mr-2">Guardar</button> --}}
+                                <button type="button"  id="btnGuardar" class="btn btn-primary mr-2">Guardar</button>
                                 <a href="{{ route('programacion.listadoprogramacion') }}"  class="btn btn-secondary">Cancelar</a>
                             </div>
                         </div>

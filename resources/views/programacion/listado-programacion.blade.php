@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('scripts')
-  {{-- <script src="{{ asset('js/tarifario/CatalogoTarifario.js') }}"></script> --}}
+  <script src="{{ asset('js/programacion/CatalogoProgramacion.js') }}"></script>
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endpush
 @section('title')
@@ -40,7 +40,7 @@
                                 {{-- @endif --}}
                                 <!--end::Button-->
 
-                                <a href="" class="btn btn-light-primary font-weight-bolder mr-3 ml-3">
+                                <a href="{{ route('programacion.programacioninactivas') }}" class="btn btn-light-primary font-weight-bolder mr-3 ml-3">
                                     <i class="far fa-trash-alt"></i>Programación inactivas</a>
 
                                 <!--begin::Dropdown-->
@@ -136,23 +136,31 @@
                           </div>
 
                             <!--begin: Datatable-->
-                            <table class="table table-hover table-checkable" id="kdatatable_tarifario">
+                            <table class="table table-hover table-checkable" id="kdatatable_programacion">
                                 <thead>
                                 <tr>
                                   <th>No.</th>
+                                  <th>Folio</th>
                                   <th>Cliente</th>
+                                  <th>Domicilio origen</th>
+                                  <th>Domicilio destino</th>
                                   <th>Fecha y Hora</th>
                                   <th>Tipo de servicio</th>
-                                  <th class="text-center">Opciones</th>
+                                  <th>Estatus</th>
+                                  <th class="text-center">Acciones</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                   <th>No.</th>
+                                  <th>Folio</th>
                                   <th>Cliente</th>
+                                  <th>Domicilio origen</th>
+                                  <th>Domicilio destino</th>
                                   <th>Fecha y Hora</th>
                                   <th>Tipo de servicio</th>
-                                  <th class="text-center">Opciones</th>
+                                  <th>Estatus</th>
+                                  <th class="text-center">Acciones</th>
                                 </tr>
                                 </tfoot>
 
@@ -160,7 +168,7 @@
                             <!--end: Datatable-->
 
                             <input type="hidden" id="datatable_i18n" value="{{ asset('/js/datatables/i18n/es-mx.json') }}">
-                            {{-- <input type="hidden" id="tarifariodatatable" value="{{ route('tarifario.tarifariolistadodatatable') }}"> --}}
+                            <input type="hidden" id="programaciondatatable" value="{{ route('programacion.programaciondatatable') }}">
 
                         </div>
                     </div>
@@ -174,9 +182,9 @@
     </div>
     <!--end::List-->
 </div>
-  <form method="post" id="tarifario_delete_form" action="{{ route('tarifario.desactivartarifario') }}" enctype="multipart/form-data">
+  <form method="post" id="programacion_delete_form" action="{{ route('programacion.deasactivarprogramacion') }}" enctype="multipart/form-data">
     @csrf
-    <input type="hidden" name="id" id="id_tarifario_delete" value="">
+    <input type="hidden" name="id" id="id_programacion_delete" value="">
   </form>
 
 @endsection
