@@ -19,6 +19,7 @@ use App\Models\Programacion\Programacion;
 use App\Models\Programacion\AcompanantesProgramacion;
 use App\Models\Programacion\EstatusProgramacion;
 use App\Models\Programacion\FolioProgramacion;
+use App\Models\Programacion\EstadiasProgramacion;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -337,6 +338,24 @@ class ProgramacionController extends Controller
 
         session()->flash('success', 'La programación se activo correctamente');
         return redirect()->route('programacion.programacioninactivas');        
+    }
+
+    public function verprogramacion($id_programacion)
+    {
+        $cliente = Cliente::where('siaf_status', 1)->get();
+        $tarifario = Tarifario::where('siaf_status', 1)->get();
+        $custodio = Custodio::where('siaf_status', 1)->get();
+        $programacion = Programacion::where('id', $id_programacion)->first();
+        $acompanantes_pro = AcompanantesProgramacion::where('programacion_id', $id_programacion)->get();
+        //tipo de documentos en formato json
+        $cadenaTipoDocumento = "";
+        foreach($custodio as $documento){
+            $cadenaTipoDocumento .= '"'.$documento->id.'":"'.$documento->nombre_custodio. " ".$documento->ap_paterno. " ". $documento->ap_materno.'",';
+        }
+        $cadenaTipoDocumento = '{'.rtrim($cadenaTipoDocumento, ',').'}';
+
+
+        return view('programacion.ver-programacion', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion'));           
     }
 
 }

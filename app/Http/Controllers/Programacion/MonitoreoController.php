@@ -19,6 +19,7 @@ use App\Models\Programacion\Programacion;
 use App\Models\Programacion\AcompanantesProgramacion;
 use App\Models\Programacion\EstatusProgramacion;
 use App\Models\Programacion\FolioProgramacion;
+use App\Models\Programacion\EstadiasProgramacion;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -152,6 +153,82 @@ class MonitoreoController extends Controller
         );
 
         return response()->json($response);
+    }
+
+    public function moduloestadias($id_programacion)
+    {
+        
+        $programacion = Programacion::where('id', $id_programacion)->first();
+        $estadias_info = EstadiasProgramacion::where('programacion_id', $id_programacion)->first();
+        if($estadias_info == null) { $op_estadia = 0; }else{ $op_estadia = 1; }
+        $estatus_programacion = EstatusProgramacion::get();
+
+        return view('monitoreo.crear-estadias', compact('programacion', 'estadias_info', 'op_estadia', 'estatus_programacion', 'id_programacion'));
+    }
+
+    public function guardarestadia(Request $request)
+    {
+
+        if($request->op_estadias == 0){
+            $data = [
+                'programacion_id' => $request->id_programacion,
+                'nombre_conductor' => $request->nombre_conductor,
+                'telefono' => $request->telefono,
+                'placas' => $request->placas,
+                'generales_unidad' => $request->observaciones,
+                'fechahora_llegada_custodio' => $request->fechahora_llegada_custodio,
+                'fechahora_inicio_trayecto' => $request->fechahora_inicio_trayecto,
+                'fechahora_llegado_destino'=> $request->fechahora_llegado_destino,
+                'fechahora_finalizacion' => $request->fechahora_finalizacion,
+                'created_at' =>date('Y-m-d H:i:s'),
+                'updated_at' =>date('Y-m-d H:i:s'),
+                'iduserCreated' =>auth()->user()->id,
+                'iduserUpdated' =>auth()->user()->id,
+            ];
+
+            EstadiasProgramacion::insert($data);
+
+            session()->flash('success', 'La estadia se creo correctamente');
+            return redirect()->route('monitoreo.listamonitoreo');
+
+        }else{
+            $data = [
+                'programacion_id' => $request->id_programacion,
+                'nombre_conductor' => $request->nombre_conductor,
+                'telefono' => $request->telefono,
+                'placas' => $request->placas,
+                'generales_unidad' => $request->observaciones,
+                'fechahora_llegada_custodio' => $request->fechahora_llegada_custodio,
+                'fechahora_inicio_trayecto' => $request->fechahora_inicio_trayecto,
+                'fechahora_llegado_destino'=> $request->fechahora_llegado_destino,
+                'fechahora_finalizacion' => $request->fechahora_finalizacion,
+                'updated_at' =>date('Y-m-d H:i:s'),
+                'iduserUpdated' =>auth()->user()->id,
+            ];
+
+            EstadiasProgramacion::where('programacion_id', $request->id_programacion)->update($data);
+
+            session()->flash('success', 'La estadia se modifico correctamente');
+            return redirect()->route('monitoreo.listamonitoreo');
+        }
+    }
+
+    public function infoestatuspro($id_programacion)
+    {
+        $cliente = Cliente::where('siaf_status', 1)->get();
+        $tarifario = Tarifario::where('siaf_status', 1)->get();
+        $custodio = Custodio::where('siaf_status', 1)->get();
+        $programacion = Programacion::where('id', $id_programacion)->first();
+        $acompanantes_pro = AcompanantesProgramacion::where('programacion_id', $id_programacion)->get();
+        //tipo de documentos en formato json
+        $cadenaTipoDocumento = "";
+        foreach($custodio as $documento){
+            $cadenaTipoDocumento .= '"'.$documento->id.'":"'.$documento->nombre_custodio. " ".$documento->ap_paterno. " ". $documento->ap_materno.'",';
+        }
+        $cadenaTipoDocumento = '{'.rtrim($cadenaTipoDocumento, ',').'}';
+        $estatus_programacion = EstatusProgramacion::get();
+
+        return view('monitoreo.info-proestatus', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'estatus_programacion')); 
     }
 
 }

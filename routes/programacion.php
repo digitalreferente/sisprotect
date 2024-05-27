@@ -14,7 +14,11 @@
 	Route::post('/desactivar-programacion', [App\Http\Controllers\Programacion\ProgramacionController::class, 'deasactivarprogramacion'])->name('programacion.deasactivarprogramacion');
 	Route::get('/catalogo-programacion-inactivos', [App\Http\Controllers\Programacion\ProgramacionController::class, 'programacioninactivas'])->name('programacion.programacioninactivas');
 	Route::post('/activar-programacion', [App\Http\Controllers\Programacion\ProgramacionController::class, 'activarprogramacion'])->name('programacion.activarprogramacion');
+	Route::get('/ver-programacion/{id}', [App\Http\Controllers\Programacion\ProgramacionController::class, 'verprogramacion'])->name('programacion.verprogramacion');
 
 	// M O N I T O R E O
 	Route::get('/listado-monitoreo', [App\Http\Controllers\Programacion\MonitoreoController::class, 'listadomonitoreo'])->name('monitoreo.listamonitoreo');
-	Route::post('/monitoreo-datatable', [App\Http\Controllers\Programacion\MonitoreoController::class, 'monitoreodatatable'])->name('monitoreo.monitoreodatatable');
+	Route::post('/monitoreo-datatable', [App\Http\Controllers\Programacion\MonitoreoController::class, 'monitoreodatatable'])->name('monitoreo.monitoreodatatable');	
+	Route::get('/modulo-estadias/{id}', [App\Http\Controllers\Programacion\MonitoreoController::class, 'moduloestadias'])->name('monitoreo.moduloestadias');
+	Route::post('/guardar-estadia', [App\Http\Controllers\Programacion\MonitoreoController::class, 'guardarestadia'])->name('monitoreo.guardarestadia'); 
+	Route::get('/info-estatuspro/{id}', [App\Http\Controllers\Programacion\MonitoreoController::class, 'infoestatuspro'])->name('monitoreo.verprogramacionmon');

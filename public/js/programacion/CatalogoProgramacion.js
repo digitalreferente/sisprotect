@@ -74,7 +74,7 @@ var Tabla = function() {
                         var opt_ver = ``; var opt_edit = ``; var opt_desactivar =`` ; 
   
                            opt_ver =  `
-                                <a href="/custodio/ver-custodio/`+full.id+`" class="btn btn-sm btn-outline-success btn-icon mt-2" title="Ver programación" data-theme="dark" data-toggle="tooltip" data-placement="top">
+                                <a href="/programacion/ver-programacion/`+full.id+`" class="btn btn-sm btn-outline-success btn-icon mt-2" title="Ver programación" data-theme="dark" data-toggle="tooltip" data-placement="top">
                                     <span class="svg-icon svg-icon-md">
                                         <i class="flaticon-eye"></i>
                                     </span>

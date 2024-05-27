@@ -74,7 +74,7 @@ var Tabla = function() {
                         var opt_ver = ``; var opt_edit = ``; var opt_desactivar =`` ; 
   
                            opt_ver =  `
-                                <a href="" class="btn btn-sm btn-outline-success btn-icon mt-2" title="Ver programación" data-theme="dark" data-toggle="tooltip" data-placement="top">
+                                <a href="/programacion/info-estatuspro/`+full.id+`" class="btn btn-sm btn-outline-success btn-icon mt-2" title="Ver programación" data-theme="dark" data-toggle="tooltip" data-placement="top">
                                     <span class="svg-icon svg-icon-md">
                                         <i class="flaticon-eye"></i>
                                     </span>
@@ -82,9 +82,9 @@ var Tabla = function() {
                             `;
 
                            opt_edit =  `
-                                <a href="" class="btn btn-sm btn-outline-success btn-icon mt-2" title="Editar programación" data-theme="dark" data-toggle="tooltip" data-placement="top">
+                                <a href="/programacion/modulo-estadias/`+full.id+`"  class="btn btn-sm btn-outline-success btn-icon mt-2" title="Estadias" data-theme="dark" data-toggle="tooltip" data-placement="top">
                                     <span class="svg-icon svg-icon-md">
-                                        <i class="flaticon-edit"></i>
+                                        <i class="flaticon-presentation-1"></i>
                                     </span>
                                 </a>
                             `;
