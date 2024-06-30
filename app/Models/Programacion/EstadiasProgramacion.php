@@ -35,7 +35,7 @@ class EstadiasProgramacion extends Model
     /**
      * @var array
      */
-    protected $fillable = ['programacion_id', 'nombre_conductor', 'telefono', 'placas', 'generales_unidad', 'fechahora_llegada_custodio', 'fechahora_inicio_trayecto', 'fechahora_llegado_destino', 'fechahora_finalizacion', 'created_at', 'updated_at', 'iduserCreated', 'iduserUpdated'];
+    protected $fillable = ['programacion_id', 'nombre_conductor', 'telefono', 'placas', 'generales_unidad', 'fechahora_llegada_custodio', 'fechahora_inicio_trayecto', 'fechahora_llegado_destino', 'fechahora_finalizacion', 'created_at', 'updated_at', 'iduserCreated', 'iduserUpdated', 'linea_transportistas'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -182,6 +182,7 @@ class MonitoreoController extends Controller
             $data = [
                 'programacion_id' => $request->id_programacion,
                 'nombre_conductor' => $request->nombre_conductor,
+                'linea_transportistas' => $request->linea_transportista,
                 'telefono' => $request->telefono,
                 'placas' => $request->placas,
                 'generales_unidad' => $request->observaciones,
@@ -204,6 +205,7 @@ class MonitoreoController extends Controller
             $data = [
                 'programacion_id' => $request->id_programacion,
                 'nombre_conductor' => $request->nombre_conductor,
+                'linea_transportistas' => $request->linea_transportista,
                 'telefono' => $request->telefono,
                 'placas' => $request->placas,
                 'generales_unidad' => $request->observaciones,

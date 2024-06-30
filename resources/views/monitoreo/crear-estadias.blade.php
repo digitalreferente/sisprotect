@@ -3,7 +3,7 @@
 	<script src="{{ asset('js/monitoreo/AgregarEstadias.js') }}"></script>
 @endpush
 @section('title')
-    Agregar Estadia
+    Agregar generales del transporte
 @endsection
 @section('content')
 
@@ -27,52 +27,59 @@
                                 <div class="col-lg-12">
                                     <div class="form-group row">
                                         <div class="col-lg-6">
+                                            <label>Linea transportista</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="linea_transportista" id="linea_transportista"  required/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
                                             <label>Nombre del conductor</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="nombre_conductor" id="nombre_conductor"  required/>
                                             </div>
                                         </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Telefono</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" name="telefono" id="telefono"  required/>
                                             </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Placas</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="placas" id="placas"  required/>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de llegada del custodio</label>
                                             <div class="input-group">
                                                 <input type="datetime-local" class="form-control" name="fechahora_llegada_custodio" id="fechahora_llegada_custodio"/>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de inicio de trayecto</label>
                                             <div class="input-group">
                                                 <input type="datetime-local" class="form-control" name="fechahora_inicio_trayecto" id="fechahora_inicio_trayecto"/>
                                             </div>
                                         </div>
+
+                                    </div>
+
+                                    <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de llegada a destino</label>
                                             <div class="input-group">
                                                 <input type="datetime-local" class="form-control" name="fechahora_llegado_destino" id="fechahora_llegado_destino"/>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de finalizacion</label>
                                             <div class="input-group">
@@ -98,52 +105,57 @@
                                 <div class="col-lg-12">
                                     <div class="form-group row">
                                         <div class="col-lg-6">
+                                            <label>Linea transportista</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="linea_transportista" id="linea_transportista" value="{{ $estadias_info->linea_transportistas }}" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
                                             <label>Nombre del conductor</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="nombre_conductor" id="nombre_conductor" value="{{ $estadias_info->nombre_conductor }}" required/>
                                             </div>
                                         </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Telefono</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" name="telefono" id="telefono" value="{{ $estadias_info->telefono }}" required/>
                                             </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Placas</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="placas" id="placas" value="{{ $estadias_info->telefono }}" required/>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de llegada del custodio</label>
                                             <div class="input-group">
                                                 <input type="datetime-local" class="form-control" name="fechahora_llegada_custodio" value="{{ $estadias_info->fechahora_llegada_custodio }}" id="fechahora_llegada_custodio"/>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de inicio de trayecto</label>
                                             <div class="input-group">
                                                 <input type="datetime-local" class="form-control" name="fechahora_inicio_trayecto" value="{{ $estadias_info->fechahora_inicio_trayecto }}" id="fechahora_inicio_trayecto"/>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de llegada a destino</label>
                                             <div class="input-group">
                                                 <input type="datetime-local" class="form-control" name="fechahora_llegado_destino" value="{{ $estadias_info->fechahora_llegado_destino }}" id="fechahora_llegado_destino"/>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label>Fecha y hora de finalizacion</label>
                                             <div class="input-group">
