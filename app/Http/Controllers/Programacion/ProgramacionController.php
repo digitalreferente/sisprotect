@@ -20,6 +20,7 @@ use App\Models\Programacion\AcompanantesProgramacion;
 use App\Models\Programacion\EstatusProgramacion;
 use App\Models\Programacion\FolioProgramacion;
 use App\Models\Programacion\EstadiasProgramacion;
+use App\Models\Programacion\MonitoreoProgramacion;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -39,10 +40,16 @@ class ProgramacionController extends Controller
     public function listadodoprogramacion()
     {
         $data = Cliente::where('siaf_status', 1)->get();
-        // dd($data);
         $tarifario = Tarifario::where('siaf_status', 1)->get();
+        $estatus_monitoreo = MonitoreoProgramacion::get();
+        $programcion = Programacion::select('programacion.id','programacion.folio', 'programacion.tipo_servicio', 'pe.estatus_programacion', 'cli.nombre_cliente', 'programacion.dom_origen', 'programacion.dom_destino', 'programacion.fecha_servicio', 'programacion.programacion_estatus_id', 'programacion.op_monitoreo_id',  'programacion.custodio_id')
+            ->leftjoin("programacion_estatus as pe","pe.id","programacion.programacion_estatus_id")
+            ->leftjoin("cliente as cli","cli.id","programacion.cliente_id")
+            ->where('programacion.siaf_status', 1)
+            ->get();
 
-        return view('programacion.listado-programacion', compact('data'));
+
+        return view('programacion.listado-programacion', compact('data', 'programcion', 'estatus_monitoreo'));
     }
 
     public function programaciondatatable(Request $request)
@@ -198,6 +205,7 @@ class ProgramacionController extends Controller
             'dom_origen' => $request->dom_origen,
             'dom_destino' => $request->dom_destino,
             'observaciones' => $request->observaciones,
+            'op_monitoreo_id' => $request->op_monitoreo_id,
             'siaf_status' =>1,
             'created_at' =>date('Y-m-d H:i:s'),
             'updated_at' =>date('Y-m-d H:i:s'),
@@ -274,6 +282,7 @@ class ProgramacionController extends Controller
             'dom_origen' => $request->dom_origen,
             'dom_destino' => $request->dom_destino,
             'observaciones' => $request->observaciones,
+            'op_monitoreo_id' => $request->op_monitoreo_id,
             'siaf_status' =>1,
             'updated_at' =>date('Y-m-d H:i:s'),
             'iduserUpdated' =>auth()->user()->id,
@@ -299,7 +308,7 @@ class ProgramacionController extends Controller
         }
 
 
-        session()->flash('success', 'La programación se mpdifico correctamente');
+        session()->flash('success', 'La programación se modifico correctamente');
         return redirect()->route('programacion.listadoprogramacion');
     }
 
@@ -356,6 +365,19 @@ class ProgramacionController extends Controller
 
 
         return view('programacion.ver-programacion', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion'));           
+    }
+
+    public function updatemonitoreoajax(Request $request)
+    {
+        $data = [
+            'op_monitoreo_id' =>  $request->id,
+            'iduserUpdated' =>auth()->user()->id,
+            'updated_at' =>date('Y-m-d H:i:s')
+        ];
+
+        Programacion::where('id', $request->id_programacio)->update($data);
+
+        return response()->json(['success']);  
     }
 
 }

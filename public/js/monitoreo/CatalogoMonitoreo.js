@@ -176,3 +176,88 @@ jQuery(document).ready(function() {
     Tabla.init();
 });
 
+
+
+$("#btnupdatestatus").click(function() {
+    var estatus = document.getElementById('estatus_id').value;
+
+
+  Swal.fire({
+    title: "Estas seguro de cambiar el estatus de programación",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Si!",
+    cancelButtonText: "No, Cancelar!",
+    reverseButtons: true
+  }).then(function(result) {
+    if (result.value) {
+      
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Espere un momento, la información esta siendo procesada",
+        showConfirmButton: false
+      });
+      document.getElementById("submit_estatus").submit();
+    } else if (result.dismiss === "cancel") {
+      Swal.fire(
+        "Cancelada",
+        "La acción fue cancelada",
+        "error"
+      )
+    }
+  });
+});
+
+
+
+
+    $("#kdatatable_monitoreo_activo").DataTable({
+        language: {
+            'lengthMenu': 'Display _MENU_',
+            "url": $('#datatable_i18n').val()
+        },
+
+        "dom":
+        "<'row'" +
+        "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
+        "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+        ">" +
+
+        "<'table-responsive'tr>" +
+
+        "<'row'" +
+        "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+        "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+        ">"
+    });
+
+
+    $(document).on('change', 'select[id^="programacion_id"]', function () {
+        var id = $(this).attr('id');
+        var programacion = $(this).data('programacion');
+        var idGrupo = $(this).val();
+        var idDocumento = id.replace('id_estado', '');
+        var url = $('#url_estatus').val();
+        var data = {
+            id: idGrupo, id_programacio:programacion,
+            _token: $("[name='_token']").val()
+        };
+                console.log("Id del programacion:" + programacion);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                console.log("Actualizado");
+                Swal.fire({
+                  title: "Actualizado!",
+                  text: "El estatus se actualizo correctamente!",
+                  icon: "success"
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });

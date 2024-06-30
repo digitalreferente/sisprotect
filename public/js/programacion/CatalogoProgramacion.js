@@ -271,3 +271,52 @@ jQuery(document).ready(function() {
             }
         });
     });
+
+    $("#kdatatable_programacion_activo").DataTable({
+        language: {
+            'lengthMenu': 'Display _MENU_',
+            "url": $('#datatable_i18n').val()
+        },
+
+        "dom":
+        "<'row'" +
+        "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
+        "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+        ">" +
+
+        "<'table-responsive'tr>" +
+
+        "<'row'" +
+        "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+        "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+        ">"
+    });
+
+    $(document).on('change', 'select[id^="monitoreo_id"]', function () {
+        var id = $(this).attr('id');
+        var programacion = $(this).data('programacion');
+        var idGrupo = $(this).val();
+        var idDocumento = id.replace('id_estado', '');
+        var url = $('#url_estatus').val();
+        var data = {
+            id: idGrupo, id_programacio:programacion,
+            _token: $("[name='_token']").val()
+        };
+                console.log("Id del programacion:" + programacion);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                console.log("Actualizado");
+                Swal.fire({
+                  title: "Actualizado!",
+                  text: "El campo de monitoreo se actualizo correctamente!",
+                  icon: "success"
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });

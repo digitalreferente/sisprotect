@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('scripts')
-	{{-- <script src="{{ asset('js/programacion/EditarProgramacion.js') }}"></script> --}}
+	<script src="{{ asset('js/monitoreo/CatalogoMonitoreo.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endpush
 @section('title')
@@ -164,7 +164,6 @@
                                             </div>
                                         </div>
 
-
                                     </div>
                                 </div>
 
@@ -188,19 +187,27 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="form-group row">
-                                            <div class="col-lg-12">
-                                                <label>Custodio</label>
-                                                <select class="form-control" id="custodio_id" name="custodio_id" required >
-                                                    <option value="">Selecciona una custodio</option>
-                                                    @foreach($estatus_programacion as $tp)
-                                                        <option value="{{ $tp->id }}" @selected($programacion->programacion_estatus_id == $tp->id) >{{ $tp->estatus_programacion }}</option>
-                                                    @endforeach
+                                        <form action="{{ route('monitoreo.updateestatus') }}" method="post" id="submit_estatus" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="id_programacion" value="{{ $id_programacion }}">
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Custodio</label>
+                                                    <select class="form-control" id="estatus_id" name="estatus_id" required >
+                                                        <option value="">Selecciona una custodio</option>
+                                                        @foreach($estatus_programacion as $tp)
+                                                            <option value="{{ $tp->id }}" @selected($programacion->programacion_estatus_id == $tp->id) >{{ $tp->estatus_programacion }}</option>
+                                                        @endforeach
 
-                                                </select>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-
+                                            <div class="row text-center">
+                                                <div class="col-lg-12">
+                                                    <button type="button"  id="btnupdatestatus" class="btn btn-primary mr-2">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

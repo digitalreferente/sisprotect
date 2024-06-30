@@ -20,6 +20,8 @@ use App\Models\Programacion\AcompanantesProgramacion;
 use App\Models\Programacion\EstatusProgramacion;
 use App\Models\Programacion\FolioProgramacion;
 use App\Models\Programacion\EstadiasProgramacion;
+use App\Models\Programacion\MonitoreoProgramacion;
+use App\Models\Programacion\DatosMonitoreoProgramacion;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -39,10 +41,17 @@ class MonitoreoController extends Controller
     public function listadomonitoreo()
     {
         $data = Cliente::where('siaf_status', 1)->get();
-        // dd($data);
         $tarifario = Tarifario::where('siaf_status', 1)->get();
+        $estatus_programacion = EstatusProgramacion::get();
 
-        return view('monitoreo.listado-monitoreo', compact('data'));
+        $monitoreo = Programacion::select('programacion.id','programacion.folio', 'programacion.tipo_servicio', 'pe.estatus_programacion', 'cli.nombre_cliente', 'programacion.dom_origen', 'programacion.dom_destino', 'programacion.fecha_servicio', 'programacion.programacion_estatus_id', 'programacion.op_monitoreo_id',  'programacion.custodio_id')
+            ->leftjoin("programacion_estatus as pe","pe.id","programacion.programacion_estatus_id")
+            ->leftjoin("cliente as cli","cli.id","programacion.cliente_id")
+            ->where('programacion.siaf_status', 1)
+            ->get();
+
+
+        return view('monitoreo.listado-monitoreo', compact('data', 'monitoreo', 'estatus_programacion'));
     }
 
     public function monitoreodatatable(Request $request)
@@ -230,5 +239,32 @@ class MonitoreoController extends Controller
 
         return view('monitoreo.info-proestatus', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'estatus_programacion')); 
     }
+
+    public function updateestatus(Request $request)
+    {
+        $data = [
+            'programacion_estatus_id' => $request->estatus_id,
+            'iduserUpdated' =>auth()->user()->id,
+            'updated_at' =>date('Y-m-d H:i:s')
+        ];  
+        Programacion::where('id', $request->id_programacion)->update($data);
+
+        session()->flash('success', 'El estatus de la programación se modifico correctamente');
+        return redirect()->route('monitoreo.listamonitoreo'); 
+    }
+
+    public function updateestatusajax(Request $request)
+    {
+        $data = [
+            'programacion_estatus_id' =>  $request->id,
+            'iduserUpdated' =>auth()->user()->id,
+            'updated_at' =>date('Y-m-d H:i:s')
+        ];
+
+        Programacion::where('id', $request->id_programacio)->update($data);
+
+        return response()->json(['success']);
+    }
+
 
 }

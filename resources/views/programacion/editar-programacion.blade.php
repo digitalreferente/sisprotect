@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <label>Tipo de servicio</label>
                                         <div class="radio-inline">
                                             <label class="radio">
@@ -71,6 +71,22 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="col-lg-3">
+                                        <label>Monitoreo</label>
+                                        <div class="radio-inline">
+                                            <label class="radio">
+                                                <input type="radio" {{($programacion->op_monitoreo_id == 1) ? 'checked' : ''}} name="op_monitoreo_id" value="1" />
+                                                <span></span>
+                                                Monitoreo 1
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" {{($programacion->op_monitoreo_id == 2) ? 'checked' : ''}} name="op_monitoreo_id" value="2" />
+                                                <span></span>
+                                                Monitoreo 2
+                                            </label>
+                                        </div>
+                                    </div>
+
 
 
                                     <div class="col-lg-6">

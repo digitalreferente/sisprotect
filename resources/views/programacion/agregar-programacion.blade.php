@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <label>Tipo de servicio</label>
                                         <div class="radio-inline">
                                             <label class="radio">
@@ -55,6 +55,22 @@
                                                 <input type="radio" name="tipo_servicio" value="1" />
                                                 <span></span>
                                                 Local
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <label>Monitoreo</label>
+                                        <div class="radio-inline">
+                                            <label class="radio">
+                                                <input type="radio" checked name="op_monitoreo_id" value="1" />
+                                                <span></span>
+                                                Monitoreo 1
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="op_monitoreo_id" value="2" />
+                                                <span></span>
+                                                Monitoreo 2
                                             </label>
                                         </div>
                                     </div>
