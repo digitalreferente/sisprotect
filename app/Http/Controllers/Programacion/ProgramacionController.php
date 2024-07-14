@@ -21,6 +21,7 @@ use App\Models\Programacion\EstatusProgramacion;
 use App\Models\Programacion\FolioProgramacion;
 use App\Models\Programacion\EstadiasProgramacion;
 use App\Models\Programacion\MonitoreoProgramacion;
+use App\Models\Programacion\MonitoreoIncidencias;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -363,8 +364,9 @@ class ProgramacionController extends Controller
         }
         $cadenaTipoDocumento = '{'.rtrim($cadenaTipoDocumento, ',').'}';
 
+        $incidencias = MonitoreoIncidencias::where('programacion_id', $id_programacion)->get();
 
-        return view('programacion.ver-programacion', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion'));           
+        return view('programacion.ver-programacion', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'incidencias'));           
     }
 
     public function updatemonitoreoajax(Request $request)
