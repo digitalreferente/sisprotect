@@ -248,7 +248,9 @@
                                             </span>
                                         </a>
 
-
+                                        <button class="btn btn-sm btn-outline-success btn-icon mt-2" onClick="addincidenciaid({{ $unid->id }})" data-toggle="modal" data-target="#model_add_incidencia" data-toggle="tooltip" data-theme="dark" title="Incidencia">
+                                                <i class="flaticon-notepad"></i>
+                                        </button>
                                       </td>
                                     </tr>
                                   @endforeach
@@ -294,5 +296,40 @@
     @csrf
     <input type="hidden" name="id" id="id_programacion_delete" value="">
   </form>
+
+
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="model_add_incidencia">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Incidencia</h5>
+                  <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                      <span class="svg-icon svg-icon-2x"></span>
+                  </div>
+              </div>
+
+              <div class="modal-body">
+                <form action="{{ route('monitoreo.guardarincidencia') }}" method="post" id="submit_incidencia">
+                @csrf
+                  <div class="row form-group">
+                    <div class="col-lg-12 mt-2">
+                      <label>Incidencia</label>
+                      <textarea class="form-control" name="incidencia" id="incidencia" ></textarea>
+                      <input type="hidden" name="id" id="id_programacion">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn btn-secondary font-weight-bold" data-dismiss="modal"><i class="la la-times"></i>Cancelar</button>
+                <button type="button" id="send_incidencia" class="btn btn-success"><i class="la la-plus"></i>Guardar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
 
 @endsection

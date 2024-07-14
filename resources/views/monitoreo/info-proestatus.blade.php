@@ -215,6 +215,60 @@
                         </div>
 
 
+
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Incidencias
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!--begin: Datatable-->
+                            <table class="table table-hover table-checkable" id="kdatatable_incidenciass">
+                                <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Incidencia</th>
+                                  <th>Fecha y hora</th>
+                                  <th>Responsable</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                  @foreach($incidencias as $unid)
+                                    <tr>
+                                      <td>{{ $unid->id }}</td>
+                                      <td>{{ $unid->incidencia }}</td>
+                                      <td>{{ date('d/m/Y  h:i  A' , strtotime( $unid->created_at)) }}</td>
+                                      <td>{{ $unid->userCreated->name }}</td>
+
+{{--                                       <td class="text-center">
+                                        <button class="btn btn-clean btn-icon btn-outline-success mt-1 activar-cliente" data-id="{{ $unid->id }}" data-nombre="{{ $unid->razon_social }}" data-toggle="tooltip" data-theme="dark" title="Activar Cliente" ><i class="flaticon2-reply "></i></button>
+                                      </td> --}}
+                                    </tr>
+                                  @endforeach
+                                </tbody>
+
+                                <tfoot>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Incidencia</th>
+                                  <th>Fecha y hora</th>
+                                  <th>Responsable</th>
+                                </tr>
+                                </tfoot>
+
+                            </table>
+                            <!--end: Datatable-->
+
+                            <input type="hidden" id="datatable_i18n" value="{{ asset('/js/datatables/i18n/es-mx.json') }}">
+
+                        </div>
+                    </div>
+
+
                     </div>
                     <div class="card-footer">
                         <div class="row">

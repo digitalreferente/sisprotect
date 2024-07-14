@@ -22,6 +22,7 @@ use App\Models\Programacion\FolioProgramacion;
 use App\Models\Programacion\EstadiasProgramacion;
 use App\Models\Programacion\MonitoreoProgramacion;
 use App\Models\Programacion\DatosMonitoreoProgramacion;
+use App\Models\Programacion\MonitoreoIncidencias;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -239,7 +240,10 @@ class MonitoreoController extends Controller
         $cadenaTipoDocumento = '{'.rtrim($cadenaTipoDocumento, ',').'}';
         $estatus_programacion = EstatusProgramacion::get();
 
-        return view('monitoreo.info-proestatus', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'estatus_programacion')); 
+        $incidencias = MonitoreoIncidencias::where('programacion_id', $id_programacion)->get();
+
+
+        return view('monitoreo.info-proestatus', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'estatus_programacion', 'incidencias')); 
     }
 
     public function updateestatus(Request $request)
@@ -266,6 +270,26 @@ class MonitoreoController extends Controller
         Programacion::where('id', $request->id_programacio)->update($data);
 
         return response()->json(['success']);
+    }
+
+    public function guardarincidencia(Request $request)
+    {
+
+
+            $data = [
+                'programacion_id' => $request->id,
+                'incidencia' => $request->incidencia,
+                'created_at' =>date('Y-m-d H:i:s'),
+                'updated_at' =>date('Y-m-d H:i:s'),
+                'iduserCreated' =>auth()->user()->id,
+                'iduserUpdated' =>auth()->user()->id,
+            ];
+
+            MonitoreoIncidencias::insert($data);
+
+            session()->flash('success', 'La incidencia se creo correctamente');
+            return redirect()->route('monitoreo.listamonitoreo');
+
     }
 
 

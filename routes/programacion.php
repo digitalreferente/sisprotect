@@ -25,3 +25,4 @@
 	Route::get('/info-estatuspro/{id}', [App\Http\Controllers\Programacion\MonitoreoController::class, 'infoestatuspro'])->name('monitoreo.verprogramacionmon');
 	Route::post('/update-estatus', [App\Http\Controllers\Programacion\MonitoreoController::class, 'updateestatus'])->name('monitoreo.updateestatus');
 	Route::post('/update-estatus-ajax', [App\Http\Controllers\Programacion\MonitoreoController::class, 'updateestatusajax'])->name('monitoreo.updateestatusajax');
+	Route::post('/guardar-incidencia', [App\Http\Controllers\Programacion\MonitoreoController::class, 'guardarincidencia'])->name('monitoreo.guardarincidencia'); 

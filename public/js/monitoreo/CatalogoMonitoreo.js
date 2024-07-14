@@ -261,3 +261,45 @@ $("#btnupdatestatus").click(function() {
             }
         });
     });
+
+
+function addincidenciaid(id) {
+    document.getElementById("id_programacion").value = id;
+}
+
+
+$("#send_incidencia").click(function(){
+    var incidencia = document.getElementById("incidencia").value;
+    if(incidencia == ""){
+        Swal.fire("Para continuar debes agregar la incidencia");
+    }else{
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Espere un momento, la información esta siendo procesada",
+            showConfirmButton: false
+        });
+        document.getElementById("submit_incidencia").submit();
+    }
+});
+
+
+    $("#kdatatable_incidenciass").DataTable({
+        language: {
+            'lengthMenu': 'Display _MENU_',
+            "url": $('#datatable_i18n').val()
+        },
+
+        "dom":
+        "<'row'" +
+        "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
+        "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+        ">" +
+
+        "<'table-responsive'tr>" +
+
+        "<'row'" +
+        "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+        "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+        ">"
+    });
