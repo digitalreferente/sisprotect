@@ -23,6 +23,7 @@ use App\Models\Programacion\EstadiasProgramacion;
 use App\Models\Programacion\MonitoreoProgramacion;
 use App\Models\Programacion\DatosMonitoreoProgramacion;
 use App\Models\Programacion\MonitoreoIncidencias;
+use App\Models\Programacion\ProgramacionObservacion;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -240,10 +241,11 @@ class MonitoreoController extends Controller
         $cadenaTipoDocumento = '{'.rtrim($cadenaTipoDocumento, ',').'}';
         $estatus_programacion = EstatusProgramacion::get();
 
-        $incidencias = MonitoreoIncidencias::where('programacion_id', $id_programacion)->get();
+        $incidencias = MonitoreoIncidencias::where('programacion_id', $id_programacion)->get(); 
+        $observaciones = ProgramacionObservacion::where('programacion_id', $id_programacion)->get();
 
 
-        return view('monitoreo.info-proestatus', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'estatus_programacion', 'incidencias')); 
+        return view('monitoreo.info-proestatus', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'estatus_programacion', 'incidencias', 'observaciones')); 
     }
 
     public function updateestatus(Request $request)

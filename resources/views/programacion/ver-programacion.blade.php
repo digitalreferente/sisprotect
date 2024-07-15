@@ -172,16 +172,77 @@
                                 </div>
 
 
-
+{{-- 
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <label for="observaciones">Observaciones</label>
                                        <p> {{ $programacion->observaciones }}</p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>
+
+                    <div class="card card-custom gutter-b">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label">
+                                    Observaciones
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!--begin: Datatable-->
+                            <table class="table table-hover table-checkable" id="kdatatable_observaciones">
+                                <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Observacion</th>
+                                  <th>Fecha y hora</th>
+                                  <th>Responsable</th>
+                                  <th>Acciones</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                  @foreach($observaciones as $unid)
+                                    <tr>
+                                      <td>{{ $unid->id }}</td>
+                                      <td>{{ $unid->observacion }}</td>
+                                      <td>{{ date('d/m/Y  h:i  A' , strtotime( $unid->created_at)) }}</td>
+                                      <td>{{ $unid->userCreated->name }}</td>
+
+                                      <td class="text-center">
+
+
+                                        <button class="btn btn-sm btn-outline-success btn-icon mt-2" onClick="editpobservacion('{{$unid->id}}', '{{$unid->observacion }}')" data-toggle="modal" data-target="#model_add_incidencia" data-toggle="tooltip" data-theme="dark" title="Observaciones">
+                                               <i class="flaticon-edit"></i>
+                                        </button>
+
+
+                                        <button class="btn btn-clean btn-icon btn-outline-success mt-1 eliminar-observacion" data-id="{{ $unid->id }}" data-nombre="{{ $unid->observacion }}" data-toggle="tooltip" data-theme="dark" title="Eliminar observación" ><i class="flaticon-delete"></i></button>
+                                      </td>
+                                    </tr>
+                                  @endforeach
+                                </tbody>
+
+                                <tfoot>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Observacion</th>
+                                  <th>Fecha y hora</th>
+                                  <th>Responsable</th>
+                                  <th>Acciones</th>
+                                </tr>
+                                </tfoot>
+
+                            </table>
+                            <!--end: Datatable-->
+
+                            <input type="hidden" id="datatable_i18n" value="{{ asset('/js/datatables/i18n/es-mx.json') }}">
+
+                        </div>
+                    </div>
 
 
                     <div class="card card-custom gutter-b">
@@ -234,7 +295,7 @@
                             <input type="hidden" id="datatable_i18n" value="{{ asset('/js/datatables/i18n/es-mx.json') }}">
 
                         </div>
-                    </div
+                    </div>
 
 
 
@@ -255,6 +316,47 @@
     </div>
     <!--end::Card-->
 
+
+  <form method="post" id="observacion_delete_form" action="{{ route('programacion.eliminarobservacion') }}" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="id" id="id_observacion_delete" value="">
+    <input type="hidden" name="id_programacion" value="{{ $id_programacion }}">
+  </form>
+
+
+
+
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="model_add_incidencia">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Editar Observaciones</h5>
+                  <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                      <span class="svg-icon svg-icon-2x"></span>
+                  </div>
+              </div>
+
+              <div class="modal-body">
+                <form action="{{ route('programacion.editarobservacion') }}" method="post" id="submit_edit_observacion">
+                @csrf
+                  <div class="row form-group">
+                    <div class="col-lg-12 mt-2">
+                      <label>Observación</label>
+                      <textarea class="form-control" name="observacion" id="observacion_id" ></textarea>
+                      <input type="hidden" name="id" id="id_observacion">
+                      <input type="hidden" name="id_programacion" value="{{ $id_programacion }}">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn btn-secondary font-weight-bold" data-dismiss="modal"><i class="la la-times"></i>Cancelar</button>
+                <button type="button" id="edit_observacion" class="btn btn-success"><i class="la la-plus"></i>Guardar</button>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
 @endsection

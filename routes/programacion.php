@@ -16,6 +16,9 @@
 	Route::post('/activar-programacion', [App\Http\Controllers\Programacion\ProgramacionController::class, 'activarprogramacion'])->name('programacion.activarprogramacion');
 	Route::get('/ver-programacion/{id}', [App\Http\Controllers\Programacion\ProgramacionController::class, 'verprogramacion'])->name('programacion.verprogramacion');
 	Route::post('/update-monitoreo-ajax', [App\Http\Controllers\Programacion\ProgramacionController::class, 'updatemonitoreoajax'])->name('programacion.updatemonitoreoajax');
+	Route::post('/guardar-observacion', [App\Http\Controllers\Programacion\ProgramacionController::class, 'guardarobservacion'])->name('programacion.guardarobservacion');
+	Route::post('/eliminar-observacion-programacion', [App\Http\Controllers\Programacion\ProgramacionController::class, 'eliminarobservacion'])->name('programacion.eliminarobservacion'); 
+	Route::post('/editar-observacion-programacion', [App\Http\Controllers\Programacion\ProgramacionController::class, 'editarobservacion'])->name('programacion.editarobservacion'); 
 
 	// M O N I T O R E O
 	Route::get('/listado-monitoreo', [App\Http\Controllers\Programacion\MonitoreoController::class, 'listadomonitoreo'])->name('monitoreo.listamonitoreo');

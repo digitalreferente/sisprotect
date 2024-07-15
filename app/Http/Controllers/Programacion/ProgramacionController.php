@@ -22,6 +22,7 @@ use App\Models\Programacion\FolioProgramacion;
 use App\Models\Programacion\EstadiasProgramacion;
 use App\Models\Programacion\MonitoreoProgramacion;
 use App\Models\Programacion\MonitoreoIncidencias;
+use App\Models\Programacion\ProgramacionObservacion;
 
 use App\Models\User;
 use App\Models\Rol;
@@ -205,7 +206,7 @@ class ProgramacionController extends Controller
             'acompanantes'=> $request->op_custodios,
             'dom_origen' => $request->dom_origen,
             'dom_destino' => $request->dom_destino,
-            'observaciones' => $request->observaciones,
+            // 'observaciones' => $request->observaciones,
             'op_monitoreo_id' => $request->op_monitoreo_id,
             'siaf_status' =>1,
             'created_at' =>date('Y-m-d H:i:s'),
@@ -282,7 +283,7 @@ class ProgramacionController extends Controller
             'acompanantes'=> $request->op_custodios,
             'dom_origen' => $request->dom_origen,
             'dom_destino' => $request->dom_destino,
-            'observaciones' => $request->observaciones,
+            // 'observaciones' => $request->observaciones,
             'op_monitoreo_id' => $request->op_monitoreo_id,
             'siaf_status' =>1,
             'updated_at' =>date('Y-m-d H:i:s'),
@@ -365,8 +366,9 @@ class ProgramacionController extends Controller
         $cadenaTipoDocumento = '{'.rtrim($cadenaTipoDocumento, ',').'}';
 
         $incidencias = MonitoreoIncidencias::where('programacion_id', $id_programacion)->get();
+        $observaciones = ProgramacionObservacion::where('programacion_id', $id_programacion)->get();
 
-        return view('programacion.ver-programacion', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'incidencias'));           
+        return view('programacion.ver-programacion', compact('cliente', 'tarifario', 'custodio', 'cadenaTipoDocumento', 'programacion', 'acompanantes_pro', 'id_programacion', 'incidencias', 'observaciones'));           
     }
 
     public function updatemonitoreoajax(Request $request)
@@ -380,6 +382,52 @@ class ProgramacionController extends Controller
         Programacion::where('id', $request->id_programacio)->update($data);
 
         return response()->json(['success']);  
+    }
+
+    public function guardarobservacion(Request $request)
+    {
+
+            $data = [
+                'programacion_id' => $request->id,
+                'observacion' => $request->observacion,
+                'created_at' =>date('Y-m-d H:i:s'),
+                'updated_at' =>date('Y-m-d H:i:s'),
+                'iduserCreated' =>auth()->user()->id,
+                'iduserUpdated' =>auth()->user()->id,
+            ];
+
+            ProgramacionObservacion::insert($data);
+
+            session()->flash('success', 'La observación se creo correctamente');
+            return redirect()->route('programacion.listadoprogramacion');
+    }
+
+    public function eliminarobservacion(Request $request)
+    {
+
+            ProgramacionObservacion::where('id', $request->id)->delete();
+
+            session()->flash('success', 'La observación se elimino correctamente');
+            return redirect()->route('programacion.verprogramacion', $request->id_programacion);
+
+    }
+
+    public function editarobservacion(Request $request)
+    {
+
+        $data = [
+            'observacion' => $request->observacion,
+            'created_at' =>date('Y-m-d H:i:s'),
+            'updated_at' =>date('Y-m-d H:i:s'),
+            'iduserCreated' =>auth()->user()->id,
+            'iduserUpdated' =>auth()->user()->id,
+        ];
+
+        ProgramacionObservacion::where('id', $request->id)->update($data);
+
+            session()->flash('success', 'La observación se edito correctamente');
+            return redirect()->route('programacion.verprogramacion', $request->id_programacion);
+
     }
 
 }

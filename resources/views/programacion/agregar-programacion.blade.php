@@ -169,14 +169,14 @@
                                     </div>
                                 </div>
 
-
+{{-- 
 
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <label for="observaciones">Observaciones</label>
                                         <textarea class="form-control" name="observaciones" placeholder="*Opcional" id="observaciones" rows="5"></textarea>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>

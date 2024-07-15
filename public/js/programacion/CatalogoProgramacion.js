@@ -320,3 +320,25 @@ jQuery(document).ready(function() {
             }
         });
     });
+
+function addincidenciaid(id) {
+    document.getElementById("id_programacion").value = id;
+}
+
+
+$("#send_incidencia").click(function(){
+    var observacion = document.getElementById("observacion").value;
+    if(observacion == ""){
+        Swal.fire("Para continuar debes agregar la observacion");
+    }else{
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Espere un momento, la información esta siendo procesada",
+            showConfirmButton: false
+        });
+        document.getElementById("submit_incidencia").submit();
+    }
+});
+
+
